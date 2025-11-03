@@ -12,16 +12,27 @@ This project is a command-line application written in C++ that provides a simpli
   - List the most recently modified files.
   - List files with the largest number of versions
 
-## **Requirements**
+## Project Structure
+
+The project is broken into logical components for clarity and maintainability:
+
+* `main.cpp`: The main entry point. Creates the `Files` object and runs the command-line interface.
+* `files.hpp` / `files.cpp`: Defines the main `Files` class, which manages all application logic (e.g., `Create`, `Snapshot`, `Recent`).
+* `file.hpp` / `file.cpp`: Defines the core data structures `TreeNode` and `File`.
+* `hashmap.hpp` / `hashmap.cpp`: Defines the custom `HashMap` implementation for storing `File*` pointers.
+* `file_priority_queue.hpp`: A template-only header defining the indexed max-heap used for `RECENT_FILES` and `BIGGEST_TREES`.
+* `utils.hpp` / `utils.cpp`: Contains helper functions (`split`, `hash_str`, `time_now`) and global constants.
+
+## Requirements
 
 To compile and run this program, you will need to have a C++ compiler that supports the C++17 standard or a later version.
 
-## **How to Compile and Run**
+## How to Compile and Run
 
-To compile the program, you will need a C++ compiler that supports C++17 or later. You can use a command like the following with g++:
+To compile the program, you must compile **all** of the `.cpp` source files together. You can use a command like the following with g++:
 
 ```console
-g++ -std=c++17 -o file_version_control assignment.cpp
+g++ -std=c++17 -o file_version_control main.cpp files.cpp hashmap.cpp file.cpp utils.cpp
 ```
 
 Once compiled, you can run the executable:
